@@ -62,7 +62,10 @@ class MakeView extends ConsumerWidget {
           child: const Text('塗りパターンを作る'),
         ),
         OutlinedButton(
-          onPressed: () => postQuestion(ref),
+          onPressed: () {
+            postQuestion(ref);
+            ref.read(createQuestionProvider.notifier).reset();
+          },
           child: const Text('塗りパターンを保存する'),
         )
       ],
