@@ -11,6 +11,13 @@ class InputKey {
   InputKey({required this.value, required this.paintedCount});
 
   int get alpha => min((paintedCount / 100 * 255).round(), 255);
+
+  InputKey copyWith({int? value, int? paintedCount}) {
+    return InputKey(
+      value: value ?? this.value,
+      paintedCount: paintedCount ?? this.paintedCount,
+    );
+  }
 }
 
 @riverpod
