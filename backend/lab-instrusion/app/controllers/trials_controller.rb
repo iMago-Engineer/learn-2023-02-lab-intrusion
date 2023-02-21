@@ -15,8 +15,6 @@ class TrialsController < ApplicationController
   private
 
   def create_params
-    debugger
-
     params
     .require(:trial)
     .permit([:question_id, :count, :nickname, :solved])
