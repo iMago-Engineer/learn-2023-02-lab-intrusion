@@ -1,13 +1,15 @@
 import 'package:lab_intrusion/input_key.dart';
 
 class Question {
+  final int id;
   final List<int> answer;
   final List<InputKey> inputKeys;
 
-  Question({required this.answer, required this.inputKeys});
+  Question({required this.id, required this.answer, required this.inputKeys});
 
   factory Question.fromJson(Map<String, dynamic> json) {
     return Question(
+      id: json['id'] as int,
       answer: (json['answer'] as int)
           .toString()
           .split('')

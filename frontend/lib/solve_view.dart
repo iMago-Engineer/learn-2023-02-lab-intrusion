@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lab_intrusion/fetch_question.dart';
 import 'package:lab_intrusion/input_password_during_solve_provider.dart';
 import 'package:lab_intrusion/result_dialog.dart';
+import 'package:http/http.dart' as http;
+import 'package:lab_intrusion/solve_count.dart';
 
 class SolveView extends ConsumerWidget {
   const SolveView({super.key});
@@ -61,6 +65,8 @@ class SolveView extends ConsumerWidget {
           data: (question) {
             return OutlinedButton(
               onPressed: () {
+                ref.read(solveCountProvider.notifier).increment();
+
                 final input = ref.watch(inputPasswordDuringSolveProvider);
                 final correct = question.answer;
                 if (kDebugMode) {
@@ -74,6 +80,26 @@ class SolveView extends ConsumerWidget {
                   context: context,
                   builder: (context) => ResultDialog(result: result),
                 );
+
+                if (result == true) {
+                  final client = http.Client();
+                  client.post(
+                    Uri.parse('http://localhost:3000/trials'),
+                    headers: {
+                      'Content-Type': 'application/json; charset=UTF-8'
+                    },
+                    body: jsonEncode({
+                      'trial': {
+                        'question_id': question.id,
+                        'count': ref.read(solveCountProvider),
+                        'nickname': 'test',
+                        'solved': true
+                      }
+                    }),
+                  );
+
+                  ref.read(solveCountProvider.notifier).reset();
+                }
 
                 ref.read(inputPasswordDuringSolveProvider.notifier).reset();
               },
