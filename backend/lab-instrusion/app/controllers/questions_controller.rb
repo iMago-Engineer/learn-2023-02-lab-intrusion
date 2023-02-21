@@ -20,15 +20,19 @@ class QuestionsController < ApplicationController
 
     render json: new_question,
            status: :created
-
   rescue StandardError => e
     render json: { error: 'failed to create question', data: e }, status: :bad_request
   end
 
-
   # GET /questions/:id
   def show
     render json: Question.find(params[:id]),
+           status: :ok
+  end
+
+  # GET /questions/random
+  def random
+    render json: Question.all.sample,
            status: :ok
   end
 

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  get 'questions/random', action: :random, controller: 'questions'
   resources :questions, only: [:index, :create, :show] do
     resources :trials, only: [:index], controller: 'questions/trials'
   end
