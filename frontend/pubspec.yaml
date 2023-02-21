@@ -39,6 +39,8 @@ dependencies:
   flutter_riverpod: ^2.2.0
   riverpod_annotation: ^1.2.1
 
+  http: ^0.13.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

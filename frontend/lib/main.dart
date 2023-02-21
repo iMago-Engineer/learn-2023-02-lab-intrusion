@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lab_intrusion/make_view.dart';
+// import 'package:lab_intrusion/make_view.dart';
 import 'package:lab_intrusion/solve_view.dart';
 
 void main() {
@@ -29,12 +29,12 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final tabs = [
       const Tab(text: '解く'),
-      const Tab(text: '作る'),
+      // const Tab(text: '作る'),
     ];
 
     final tabViews = [
       const SolveView(),
-      const MakeView(),
+      // const MakeView(),
     ];
 
     return DefaultTabController(
